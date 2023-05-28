@@ -1,12 +1,14 @@
 import * as React from "react";
-import { NavigationContaier } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { NativeBaseProvider } from "native-base";
-import theme from "../theme";
+import theme from '../theme';
 
-export default function AppContainer(props) {
+const AppContainer = (props) =>{
   return (
-    <NavigationContaier>
-      <NativeBaseProvider theme={theme}> {props.children}</NativeBaseProvider>
-    </NavigationContaier>
+    <NavigationContainer>
+      <NativeBaseProvider theme={theme}>{props.children}</NativeBaseProvider>
+    </NavigationContainer>
   );
 }
+
+export default AppContainer;

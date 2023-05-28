@@ -1,13 +1,12 @@
 import { View, Text } from "react-native";
 import React from "react";
-import { Flex } from "native-base";
 
-const AboutScreen = () => {
+const PhotoScreen = () => {
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>AboutScreen</Text>
+      <Text>PhotoScreen</Text>
     </View>
   );
 };
 
-export default AboutScreen;
+export default PhotoScreen;
