@@ -34,14 +34,8 @@ const App = () => {
         },
         headerShown: false,
         tabBarActiveTintColor: "#e91e63",
+        tabBarShowLabel: false,
       })}
-      tabBarOptions={{
-        showLabel: false,
-        tabBarActiveTintColor: "#e91e63",
-        style: {
-          height: 75,
-        },
-      }}
     >
       <Tab.Screen name="Home" component={MainScreen} />
       <Tab.Screen name="Live" component={LiveScreen} />
