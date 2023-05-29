@@ -33,8 +33,10 @@ const App = () => {
           return <Ionicons name={iconName} size={size} color={color} />;
         },
         headerShown: false,
-        tabBarActiveTintColor: "#e91e63",
-        tabBarShowLabel: false,
+        tabBarActiveTintColor: "black",
+        tabBarStyle: {
+          paddingBottom: 5,
+        },
       })}
     >
       <Tab.Screen name="Home" component={MainScreen} />
