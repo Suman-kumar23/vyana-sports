@@ -1,11 +1,14 @@
-import { View, Text } from "react-native";
+import { View, Text, Platform, StatusBar, SafeAreaView } from "react-native";
 import React from "react";
+import SafeArea from "../components/safe-area";
 
 const LiveScreen = () => {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>LiveScreen</Text>
-    </View>
+   
+      <SafeArea>
+        <Text>LiveScreen</Text>
+      </SafeArea>
+
   );
 };
 

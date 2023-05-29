@@ -1,18 +1,12 @@
 import { Text, View, SafeAreaView, Platform, StatusBar } from "react-native";
 import React from "react";
+import SafeArea from "../components/safe-area";
 
 const MainScreen = () => {
   return (
-    <View
-      style={{
-        flex: 1,
-        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
-      }}
-    >
-      <SafeAreaView>
-        <Text> MainScreen</Text>
-      </SafeAreaView>
-    </View>
+    <SafeArea>
+      <Text> MainScreen</Text>
+    </SafeArea>
   );
 };
 

@@ -1,11 +1,12 @@
-import { View, Text } from "react-native";
+import { View, Text, StatusBar, Platform } from "react-native";
 import React from "react";
+import SafeArea from "../components/safe-area";
 
 const PhotoScreen = () => {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <SafeArea>
       <Text>PhotoScreen</Text>
-    </View>
+    </SafeArea>
   );
 };
 

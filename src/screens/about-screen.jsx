@@ -1,13 +1,14 @@
-import { View, Text } from "react-native";
+import { View, Text, SafeAreaView, StatusBar, Platform } from "react-native";
 import React from "react";
 import { Avatar } from "native-base";
+import SafeArea from "../components/safe-area";
 
 const AboutScreen = () => {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <SafeArea>
       <Avatar source={{ uri: "https://placebear.com/400/400" }} size="xl" />
       <Text>AboutScreen</Text>
-    </View>
+    </SafeArea>
   );
 };
 
