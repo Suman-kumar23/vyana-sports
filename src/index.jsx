@@ -3,10 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
 // Screens
-import MainScreen from "./screens/main-screen";
-import AboutScreen from "./screens/about-screen";
-import LiveScreen from "./screens/live-screen";
-import PhotoScreen from "./screens/photo-screen";
+import { AboutScreen, LiveScreen, MainScreen, PhotoScreen } from "./screens";
 
 const Tab = createBottomTabNavigator();
 
