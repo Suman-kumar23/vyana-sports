@@ -1,10 +1,14 @@
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
+import { PaperProvider } from "react-native-paper";
 
-import theme from "../theme";
 
 const AppContainer = (props) => {
-  return <NavigationContainer>{props.children}</NavigationContainer>;
+  return (
+    <NavigationContainer>
+      <PaperProvider>{props.children}</PaperProvider>
+    </NavigationContainer>
+  );
 };
 
 export default AppContainer;

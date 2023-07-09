@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
 // Screens
-import { AboutScreen, LiveScreen, MainScreen, PhotoScreen } from "./screens";
+import { AboutScreen, GalleryScreen, LiveScreen, MainScreen } from "./screens";
 
 const Tab = createBottomTabNavigator();
 
@@ -38,7 +38,7 @@ const App = () => {
     >
       <Tab.Screen name="Home" component={MainScreen} />
       <Tab.Screen name="Live" component={LiveScreen} />
-      <Tab.Screen name="Photos" component={PhotoScreen} />
+      <Tab.Screen name="Photos" component={GalleryScreen} />
       <Tab.Screen name="About" component={AboutScreen} />
     </Tab.Navigator>
   );
