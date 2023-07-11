@@ -1,13 +1,13 @@
 import * as React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { PaperProvider } from "react-native-paper";
-
+import { Provider } from "react-redux";
+import store from "../store";
 
 const AppContainer = (props) => {
   return (
-    <NavigationContainer>
-      <PaperProvider>{props.children}</PaperProvider>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>{props.children}</NavigationContainer>
+    </Provider>
   );
 };
 

@@ -55,3 +55,65 @@ const styles = StyleSheet.create({
 });
 
 export default GalleryScreen;
+
+// import React, { useEffect, useState } from "react";
+// import { View, Image, FlatList } from "react-native";
+
+// const GalleryScreen = () => {
+//   const [photos, setPhotos] = useState([]);
+
+//   useEffect(() => {
+//     // Assuming you have obtained an access token through the authentication process
+//     const accessToken = "<your_access_token>";
+
+//     // Fetch the user's photos from Google Photos API
+//     fetchGooglePhotos(accessToken)
+//       .then((photos) => {
+//         setPhotos(photos);
+//       })
+//       .catch((error) => {
+//         console.error("Error fetching photos:", error);
+//       });
+//   }, []);
+
+//   const fetchGooglePhotos = async (accessToken) => {
+//     const url = "https://photoslibrary.googleapis.com/v1/mediaItems";
+//     const headers = {
+//       Authorization: "Bearer " + accessToken,
+//       "Content-Type": "application/json",
+//     };
+
+//     const response = await fetch(url, { headers });
+//     const data = await response.json();
+
+//     if (data.mediaItems) {
+//       return data.mediaItems;
+//     } else {
+//       throw new Error("No photos found.");
+//     }
+//   };
+
+//   const renderPhotoItem = ({ item }) => {
+//     return (
+//       <View>
+//         <Image
+//           source={{ uri: item.baseUrl }}
+//           style={{ width: 100, height: 100 }}
+//         />
+//       </View>
+//     );
+//   };
+
+//   return (
+//     <View>
+//       <FlatList
+//         data={photos}
+//         renderItem={renderPhotoItem}
+//         keyExtractor={(item) => item.id}
+//         numColumns={3} // Adjust the number of columns as desired
+//       />
+//     </View>
+//   );
+// };
+
+// export default GalleryScreen;

@@ -7,7 +7,6 @@ const SafeArea = (props) => {
       style={{
         paddingTop:
           Platform.OS === "android" ? StatusBar.currentHeight + 10 : 0,
-        // flex: 1,
         margin: 5,
       }}
     >

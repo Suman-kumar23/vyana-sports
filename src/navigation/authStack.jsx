@@ -1,16 +1,18 @@
-import { NavigationContainer } from "@react-navigation/native";
+import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import { LoginScreen, SignUpScreen, FPScreen } from "../screens";
 
-import { AboutScreen, MainScreen, MatchScreen } from "../screens/index";
-
-const Stack = createStackNavigator();
+const options = {
+  headerShown: false,
+};
 
 const AuthStack = () => {
+  const Stack = createStackNavigator();
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="About" component={AboutScreen} />
-      <Stack.Screen name="Main" component={MainScreen} />
-      <Stack.Screen name="Match" component={MatchScreen} />
+    <Stack.Navigator initialRouteName="Login" screenOptions={options}>
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="SignUp" component={SignUpScreen} />
+      <Stack.Screen name="ForgotPassword" component={FPScreen} />
     </Stack.Navigator>
   );
 };

@@ -7,12 +7,15 @@ import {
   Text,
   StyleSheet,
 } from "react-native";
-import { Video } from "expo-av";
+
 import axios from "axios";
 import SafeArea from "../components/safe-area";
+import YouTube from "react-native-youtube";
 
 const VideoGallery = () => {
   const [videos, setVideos] = useState([]);
+  const apiKey = "AIzaSyBaG2RWY4O6R6WFq49Ffo2Y86NwHDp7UVs";
+  const playlistId = "PLKMb_3v_GIXmfjtiAHUfBAjWUeP0bZsAp";
 
   useEffect(() => {
     fetchVideos();
@@ -21,7 +24,7 @@ const VideoGallery = () => {
   const fetchVideos = async () => {
     try {
       const response = await axios.get(
-        " https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=50&playlistId=PLKMb_3v_GIXmfjtiAHUfBAjWUeP0bZsAp&key=AIzaSyBaG2RWY4O6R6WFq49Ffo2Y86NwHDp7UVs"
+        `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=50&playlistId=${playlistId}&key=${apiKey}`
       );
 
       setVideos(response.data.items);
@@ -53,23 +56,24 @@ const VideoGallery = () => {
 
   const playVideo = async (videoId) => {
     try {
-      await Video.requestPermissionsAsync();
-      const { status } = await Video.getPermissionsAsync();
+      // await Video.requestPermissionsAsync();
+      // const { status } = await Video.getPermissionsAsync();
 
-      if (status === "granted") {
-        await Video.setIsEnabledAsync(true);
-        await Video.setFullscreen(true);
-        await Video.loadAsync({
-          uri: `https://www.youtube.com/watch?v=Hi9iCXl8WsE`,
-        });
-      }
-
-      // <Video
-      //   source={{ uri: `https://www.youtube.com/watch?v=${videoId}` }}
-      //   // resizeMode="contain"
-      //   useNativeControls
-      //   style={styles.videoPlayer}
-      // />;
+      // if (status === "granted") {
+      //   await Video.setIsEnabledAsync(true);
+      //   await Video.setFullscreen(true);
+      //   await Video.loadAsync({
+      //     uri: `https://www.youtube.com/watch?v=Hi9iCXl8WsE`,
+      //   });
+      // }
+      <YouTube
+        videoId={videoId}
+        apiKey="AIzaSyBaG2RWY4O6R6WFq49Ffo2Y86NwHDp7UVs"
+        play={true}
+        hidden={false}
+        loop={false}
+        style={styles.youtubePlayer}
+      />;
     } catch (error) {
       console.error("Error playing video:", error);
     }
@@ -114,6 +118,10 @@ const styles = StyleSheet.create({
 
   videoPlayer: {
     width: "100%",
+    height: 300,
+  },
+  youtubePlayer: {
+    alignSelf: "stretch",
     height: 300,
   },
 });

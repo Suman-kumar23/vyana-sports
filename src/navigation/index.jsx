@@ -1,11 +1,10 @@
-import { useAuthentication } from "../utils/useAuthentication";
-
 import UserStack from "./userStack";
 import AuthStack from "./authStack";
+import { useSelector } from "react-redux";
 
 const RootNavigation = () => {
-  const { user } = useAuthentication();
-  return user ? <AuthStack /> : <UserStack />;
+  const user = useSelector((state) => state.auth.user);
+  return user ? <UserStack /> : <AuthStack />;
 };
 
 export default RootNavigation;

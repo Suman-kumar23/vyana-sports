@@ -1,14 +1,15 @@
-import { Text, View, SafeAreaView, Platform, StatusBar } from "react-native";
+import { Text } from "react-native";
 import React from "react";
 import SafeArea from "../components/safe-area";
-import { Avatar } from "react-native-paper";
+import { Avatar } from "@rneui/themed";
 
 const MainScreen = () => {
   return (
     <SafeArea>
       <Text> MainScreen</Text>
-      <Avatar.Image
+      <Avatar
         size={160}
+        rounded
         source={{ uri: "https://placebear.com/400/400" }}
       />
     </SafeArea>

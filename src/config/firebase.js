@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+
 import Constants from "expo-constants";
+import firebase from "firebase/compat/app";
 
 const firebaseConfig = {
   apiKey: Constants.expoConfig?.extra?.firebaseApiKey,
@@ -11,6 +12,8 @@ const firebaseConfig = {
   appId: Constants.expoConfig?.extra?.firebaseAppId,
 };
 
-// Initialize Firebase
-const app = initializeApp();
-export default app;
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+
+

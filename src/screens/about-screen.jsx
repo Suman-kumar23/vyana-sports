@@ -2,43 +2,33 @@ import { View, Text } from "react-native";
 import React, { useState } from "react";
 
 import SafeArea from "../components/safe-area";
-import { Avatar, Button, Divider, Modal, Portal } from "react-native-paper";
+
+import { Avatar, Button, Divider } from "@rneui/themed";
 import { Ionicons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
+import { useDispatch, useSelector } from "react-redux";
+import { logOut } from "../store/slices/authSlice";
+
 const AboutScreen = () => {
-  const [visibleLanguage, setVisibleLanguage] = useState(false);
-  const showLanguageModal = () => {
-    setVisibleLanguage(true);
+  const dispatch = useDispatch();
+  const handlelogOut = () => {
+    dispatch(logOut());
   };
-  const hideLanguageModal = () => {
-    setVisibleLanguage(false);
-  };
-  const containerStyle = { backgroundColor: "white", padding: 20 };
+
   return (
     <SafeArea>
-      <Portal>
-        <Modal
-          visible={visibleLanguage}
-          onDismiss={hideLanguageModal}
-          contentContainerStyle={containerStyle}
-        >
-          <Text>Example Modal. Click outside this area to dismiss.</Text>
-        </Modal>
-      </Portal>
-
       <View style={{ justifyContent: "space-between", height: "100%" }}>
         <View
           style={{
             flexDirection: "row",
             alignItems: "center",
-
             marginTop: 30,
-
             paddingLeft: 30,
           }}
         >
-          <Avatar.Image
+          <Avatar
+            rounded
             source={{ uri: "https://placebear.com/400/400" }}
             size={100}
           />
@@ -52,28 +42,12 @@ const AboutScreen = () => {
         </View>
         <View style={{ marginTop: 80 }}>
           <Divider />
-          <Button>
-            <Text style={{ fontSize: 20, color: "#000000" }}>Subscription</Text>
-          </Button>
+          <Button title="Subscriptions" type="clear" />
           <Divider />
-          <Button onPress={showLanguageModal}>
-            {" "}
-            <Text style={{ fontSize: 20, color: "#000000" }}>
-              Select Language
-            </Text>
-          </Button>
+
+          <Button title="Terms & Condition" type="clear" />
           <Divider />
-          <Button>
-            {" "}
-            <Text style={{ fontSize: 20, color: "#000000" }}>
-              Term & Condition
-            </Text>
-          </Button>
-          <Divider />
-          <Button>
-            {" "}
-            <Text style={{ fontSize: 20, color: "#000000" }}>FAQs</Text>
-          </Button>
+          <Button title="FAQs" type="clear" />
           <Divider />
         </View>
         <View
@@ -97,7 +71,12 @@ const AboutScreen = () => {
         <View
           style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
-          <Button>Logout</Button>
+          <Button
+            title="Logout"
+            type="clear"
+            size="lg"
+            onPress={handlelogOut}
+          />
           <Text>Version 0.0.1 2023</Text>
         </View>
       </View>
