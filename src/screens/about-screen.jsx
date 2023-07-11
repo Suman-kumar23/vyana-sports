@@ -16,6 +16,8 @@ const AboutScreen = () => {
     dispatch(logOut());
   };
 
+  const user = useSelector((state) => state.auth.user);
+
   return (
     <SafeArea>
       <View style={{ justifyContent: "space-between", height: "100%" }}>
@@ -29,12 +31,12 @@ const AboutScreen = () => {
         >
           <Avatar
             rounded
-            source={{ uri: "https://placebear.com/400/400" }}
+            source={{ uri: user.pic ? user.pic : "https:picsum.photos/400" }}
             size={100}
           />
           <View style={{ paddingLeft: 20, paddingBottom: 10 }}>
-            <Text>Suman Kumar</Text>
-            <Text>suman@test.com</Text>
+            <Text>{user.name}</Text>
+            <Text>{user.email}</Text>
             <TouchableOpacity>
               <Text style={{ color: "purple" }}>Edit Profile</Text>
             </TouchableOpacity>
