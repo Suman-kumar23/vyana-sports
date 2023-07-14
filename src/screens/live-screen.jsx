@@ -14,6 +14,7 @@ import YouTube from "react-native-youtube";
 
 const VideoGallery = () => {
   const [videos, setVideos] = useState([]);
+  const [Vid, setVid] = useState();
   const apiKey = "AIzaSyBaG2RWY4O6R6WFq49Ffo2Y86NwHDp7UVs";
   const playlistId = "PLKMb_3v_GIXmfjtiAHUfBAjWUeP0bZsAp";
 
@@ -24,7 +25,7 @@ const VideoGallery = () => {
   const fetchVideos = async () => {
     try {
       const response = await axios.get(
-        `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=50&playlistId=${playlistId}&key=${apiKey}`
+        `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet%2CcontentDetails&maxResults=10&playlistId=${playlistId}&key=${apiKey}`
       );
 
       setVideos(response.data.items);
@@ -38,23 +39,26 @@ const VideoGallery = () => {
     const thumbnail = item.snippet.thumbnails.maxres.url;
     const title = item.snippet.title;
 
+    setVid(videoId);
+
     // console.log(videoId,thumbnail,title)
     return (
       <TouchableOpacity
         style={styles.videoContainer}
-        onPress={() => playVideo(videoId)}
+        onPress={() => playVideo()}
       >
-        <Image
-          source={{ uri: thumbnail }}
-          style={styles.thumbnail}
-          resizeMode="cover"
-        />
+        <TouchableOpacity>
+          <Image
+            source={{ uri: thumbnail }}
+            style={styles.thumbnail}
+            resizeMode="cover"
+          />
+        </TouchableOpacity>
         <Text style={styles.title}>{title}</Text>
       </TouchableOpacity>
     );
   };
-
-  const playVideo = async (videoId) => {
+  const playVideo = () => {
     try {
       // await Video.requestPermissionsAsync();
       // const { status } = await Video.getPermissionsAsync();
@@ -66,8 +70,9 @@ const VideoGallery = () => {
       //     uri: `https://www.youtube.com/watch?v=Hi9iCXl8WsE`,
       //   });
       // }
+      console.log(Vid);
       <YouTube
-        videoId={videoId}
+        videoId={Vid}
         apiKey="AIzaSyBaG2RWY4O6R6WFq49Ffo2Y86NwHDp7UVs"
         play={true}
         hidden={false}

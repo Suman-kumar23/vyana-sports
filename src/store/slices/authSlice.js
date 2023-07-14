@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import firebase from "../../config/firebase";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import "../../config/firebase";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 
 const authSlice = createSlice({
   name: "auth",
@@ -18,7 +22,7 @@ const authSlice = createSlice({
       state.isLoggedIn = true;
     },
     removeUser: (state, action) => {
-      (state.user = null), (state.isLoggedIn = false);
+      state.isLoggedIn = false;
     },
     setError: (state, action) => {
       state.error = action.payload;
@@ -28,17 +32,47 @@ const authSlice = createSlice({
 
 export const { setUser, setError, removeUser } = authSlice.actions;
 
-export const signIn = (email, password) => async (dispatch) => {
+export const signIn = (email, password, name) => async (dispatch) => {
   const auth = getAuth();
   try {
     const response = await signInWithEmailAndPassword(auth, email, password);
     const user = {
-      name: response.user.displayName,
+      name,
       email: response.user.email,
       pic: response.user.photoURL,
     };
     dispatch(setUser(user));
-    console.log(response.user.displayName);
+  } catch (error) {
+    dispatch(setError(error.message));
+  }
+};
+
+export const signUp = (email, password, name) => async (dispatch) => {
+  const auth = getAuth();
+  try {
+    // const response = await createUserWithEmailAndPassword(
+    //   auth,
+    //   email,
+    //   password
+    // );
+    // const user = {
+    //   name: name,
+    //   email: response.user.email,
+    //   pic: picUrl,
+    // };
+    // dispatch(setUser(user));
+    const response = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+    const user = {
+      name: name,
+      email: response.user.email,
+      pic: picUrl,
+    };
+    dispatch(setUser(user));
+    console.log(response.user.email);
   } catch (error) {
     dispatch(setError(error.message));
   }
