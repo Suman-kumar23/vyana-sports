@@ -9,11 +9,12 @@ import { signIn } from "../store/slices/authSlice";
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [passwordShown, setPasswordShown] = useState(false);
   const [errorMsg, setErrorMessage] = useState();
 
+
   const dispatch = useDispatch();
+  
   const error = useSelector((state) => state.auth.error);
 
   const handleLogin = () => {

@@ -38,7 +38,6 @@ const VideoGallery = ({ navigation }) => {
     const thumbnail = item.snippet.thumbnails.maxres.url;
     const title = item.snippet.title;
 
-    // console.log(videoId,thumbnail,title)
     return (
       <TouchableOpacity
         style={styles.videoContainer}

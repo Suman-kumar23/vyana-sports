@@ -8,7 +8,6 @@ import SafeArea from "../components/safe-area";
 const ArticleScreen = () => {
   const route = useRoute();
   const { articleId, heading, content, headerPicSource } = route.params.item;
-  console.log(articleId, heading, content, headerPicSource);
   return (
     <SafeArea>
       <View

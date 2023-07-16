@@ -1,16 +1,31 @@
 import { View, Text, Pressable } from "react-native";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Avatar } from "@rneui/themed";
+import axios from "axios";
 
-const fixtures = [
-  { team1: "Team A", team2: "Team B", date: "2023-07-15", venue: "Stadium X" },
-  { team1: "Team A", team2: "Team B", date: "2023-07-15", venue: "Stadium X" },
-  { team1: "Team A", team2: "Team B", date: "2023-07-15", venue: "Stadium X" },
-  { team1: "Team A", team2: "Team B", date: "2023-07-15", venue: "Stadium X" },
-];
+// const fixtures = [
+//   { team1: "Team A", team2: "Team B", date: "2023-07-15", venue: "Stadium X" },
+//   { team1: "Team A", team2: "Team B", date: "2023-07-15", venue: "Stadium X" },
+//   { team1: "Team A", team2: "Team B", date: "2023-07-15", venue: "Stadium X" },
+//   { team1: "Team A", team2: "Team B", date: "2023-07-15", venue: "Stadium X" },
+// ];
 
-const Fixtures = () => {
+const Fixtures = ({ fixtures }) => {
+  // const [fixtures, setFixtures] = useState([]);
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
+
+  // const fetchData = async () => {
+  //   const response = await axios.get(
+  //     `https://okhfigjs.api.sanity.io/v2021-10-21/data/query/production?query=*%5B_type%3D%3D%27fixtures%27%5D`
+  //   );
+  //   const data = response.data.result;
+  //   setFixtures(data);
+  // };
+
   return (
     <View>
       <Text
@@ -60,16 +75,16 @@ const Fixtures = () => {
                   source={{ uri: "https://picsum.photos/300" }}
                 />
                 <Text style={{ fontSize: 12, fontWeight: "bold" }}>
-                  {fixture.team1}
+                  {fixture.Team_1}
                 </Text>
               </View>
               <View style={{ alignItems: "center", justifyContent: "center" }}>
                 <View>
-                  <Text>Date : {fixture.date}</Text>
+                  <Text>Date : {fixture.Date}</Text>
                 </View>
                 <Text style={{ fontSize: 24, fontWeight: "bold" }}>V/S</Text>
                 <View>
-                  <Text>Venue : {fixture.venue}</Text>
+                  <Text>Venue : {fixture.Venue}</Text>
                 </View>
               </View>
               <View
@@ -84,7 +99,7 @@ const Fixtures = () => {
                   source={{ uri: "https://picsum.photos/300" }}
                 />
                 <Text style={{ fontSize: 12, fontWeight: "bold" }}>
-                  {fixture.team2}
+                  {fixture.Team_2}
                 </Text>
               </View>
             </View>

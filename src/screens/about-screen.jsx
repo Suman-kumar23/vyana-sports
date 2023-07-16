@@ -17,7 +17,6 @@ const AboutScreen = () => {
   };
 
   const user = useSelector((state) => state.auth.user);
-  console.log(user);
 
   return (
     <SafeArea>

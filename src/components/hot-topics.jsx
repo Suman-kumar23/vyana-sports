@@ -1,21 +1,37 @@
 import { View, Text, FlatList, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Constants } from "expo-constants";
 
-const data = [
-  { id: 1, title: "Title 1", source: "https://picsum.photos/200" },
-  { id: 2, title: "Title 2", source: "https://picsum.photos/300" },
-  { id: 3, title: "Title 3", source: "https://picsum.photos/400" },
-  { id: 4, title: "Title 4", source: "https://picsum.photos/500" },
-  { id: 5, title: "Title 5", source: "https://picsum.photos/600" },
-  { id: 6, title: "Title 6", source: "https://picsum.photos/700" },
-];
-const HotTopics = () => {
+// const data = [
+//   { id: 1, title: "Title 1", source: "https://picsum.photos/200" },
+//   { id: 2, title: "Title 2", source: "https://picsum.photos/300" },
+//   { id: 3, title: "Title 3", source: "https://picsum.photos/400" },
+//   { id: 4, title: "Title 4", source: "https://picsum.photos/500" },
+//   { id: 5, title: "Title 5", source: "https://picsum.photos/600" },
+//   { id: 6, title: "Title 6", source: "https://picsum.photos/700" },
+// ];
+
+const HotTopics = ({ hotTopics }) => {
+  // const [hotTopics, setHotTopics] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await axios.get(
+  //       `https://okhfigjs.api.sanity.io/v2021-10-21/data/query/production?query=*%5B_type%3D%3D%27hotTopics%27%5D`
+  //     );
+
+  //     const data = response.data.result;
+
+  //     setHotTopics(data);
+  //   };
+  //   fetchData();
+  // });
+
   const handlePress = () => {};
   return (
     <View
       style={{
-        // marginTop: 5,
-        // backgroundColor: "red",
         height: 160,
         width: "100%",
         marginBottom: 5,
@@ -33,7 +49,7 @@ const HotTopics = () => {
       </Text>
 
       <FlatList
-        data={data}
+        data={hotTopics}
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={handlePress}

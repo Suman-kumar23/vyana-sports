@@ -1,53 +1,69 @@
 import { View, Text, FlatList, Pressable } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 
-const articles = [
-  {
-    articleId: 1,
-    heading: "Cricket New Features",
-    content:
-      "TPrior to v2.0.0, this package would generate HTML required for the youtube iframe and serve it as raw HTML string. This meant that the base URL would be 'about:blank' and leading to a number of videos showing a \"embed not allowed\" error message.\
-       To mitigate this - the webpage had to be uploaded on to a trustable remote source (github pages). The source code of the static HTML is minified and uploaded as a part of the documentation website here.\
-       For whatever reason, if you would like to host this page on your own web server - the static HTML source can be hosted as it is. (not recommended since manual update will be required)",
-    headerPicSource: "https://picsum.photos/500",
-  },
-  {
-    articleId: 2,
-    heading: "Heading 1 ",
+// const articles = [
+//   {
+//     articleId: 1,
+//     heading: "Cricket New Features",
+//     content:
+//       "TPrior to v2.0.0, this package would generate HTML required for the youtube iframe and serve it as raw HTML string. This meant that the base URL would be 'about:blank' and leading to a number of videos showing a \"embed not allowed\" error message.\
+//        To mitigate this - the webpage had to be uploaded on to a trustable remote source (github pages). The source code of the static HTML is minified and uploaded as a part of the documentation website here.\
+//        For whatever reason, if you would like to host this page on your own web server - the static HTML source can be hosted as it is. (not recommended since manual update will be required)",
+//     headerPicSource: "https://picsum.photos/500",
+//   },
+//   {
+//     articleId: 2,
+//     heading: "Heading 1 ",
 
-    content:
-      "This is the paragram that has to be opened in the article file of the article screen. This is the paragram that has to be opened in the article file of the article screen. This is the paragram that has to be opened in the article file of the article screen",
-    headerPicSource: "https://picsum.photos/500",
-  },
-  {
-    articleId: 3,
-    heading: "Heading 1 ",
+//     content:
+//       "This is the paragram that has to be opened in the article file of the article screen. This is the paragram that has to be opened in the article file of the article screen. This is the paragram that has to be opened in the article file of the article screen",
+//     headerPicSource: "https://picsum.photos/500",
+//   },
+//   {
+//     articleId: 3,
+//     heading: "Heading 1 ",
 
-    content:
-      "This is the paragram that has to be opened in the article file of the article screen. This is the paragram that has to be opened in the article file of the article screen. This is the paragram that has to be opened in the article file of the article screen",
-    headerPicSource: "https://picsum.photos/500",
-  },
-  {
-    articleId: 4,
-    heading: "Heading 1 ",
+//     content:
+//       "This is the paragram that has to be opened in the article file of the article screen. This is the paragram that has to be opened in the article file of the article screen. This is the paragram that has to be opened in the article file of the article screen",
+//     headerPicSource: "https://picsum.photos/500",
+//   },
+//   {
+//     articleId: 4,
+//     heading: "Heading 1 ",
 
-    content:
-      "This is the paragram that has to be opened in the article file of the article screen. This is the paragram that has to be opened in the article file of the article screen. This is the paragram that has to be opened in the article file of the article screen",
-    headerPicSource: "https://picsum.photos/500",
-  },
-  {
-    articleId: 5,
-    heading: "Heading 1 ",
+//     content:
+//       "This is the paragram that has to be opened in the article file of the article screen. This is the paragram that has to be opened in the article file of the article screen. This is the paragram that has to be opened in the article file of the article screen",
+//     headerPicSource: "https://picsum.photos/500",
+//   },
+//   {
+//     articleId: 5,
+//     heading: "Heading 1 ",
 
-    content:
-      "This is the paragram that has to be opened in the article file of the article screen. This is the paragram that has to be opened in the article file of the article screen. This is the paragram that has to be opened in the article file of the article screen",
-    headerPicSource: "https://picsum.photos/500",
-  },
-];
+//     content:
+//       "This is the paragram that has to be opened in the article file of the article screen. This is the paragram that has to be opened in the article file of the article screen. This is the paragram that has to be opened in the article file of the article screen",
+//     headerPicSource: "https://picsum.photos/500",
+//   },
+// ];
 
-const RelatedArticles = () => {
+const RelatedArticles = ({ articles }) => {
   const navigation = useNavigation();
+
+  // const [articles, setArticles] = useState([]);
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
+
+  // const fetchData = async () => {
+  //   const response = await axios.get(
+  //     `https://okhfigjs.api.sanity.io/v2021-10-21/data/query/production?query=*%5B_type%3D%3D%27articles%27%5D`
+  //   );
+  //   const data = response.data.result;
+  //   setArticles(data);
+  // };
+
   return (
     <View
       style={{
