@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import React, { useState } from "react";
 import { Avatar, Button, Input } from "@rneui/themed";
 import * as ImagePicker from "expo-image-picker";
-import { signUp } from "../store/slices/authSlice";
+import { setError, signUp } from "../store/slices/authSlice";
 
 import { useDispatch } from "react-redux";
 
@@ -32,11 +32,13 @@ const SignUpScreen = () => {
 
   const handleSignUp = () => {
     try {
-      setLoading(true);
-      dispatch(signUp(email, password, name));
+      if (password !== confirmPassword) {
+      } else {
+        setLoading(true);
+        dispatch(signUp(email, password, name));
+      }
     } catch (error) {
       setLoading(false);
-      
     }
   };
 

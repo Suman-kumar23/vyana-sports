@@ -1,5 +1,5 @@
 import { ScrollView, Text, View } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import CarouselCard from "../components/corousal-card";
 import HotTopics from "../components/hot-topics";
@@ -8,8 +8,17 @@ import Fixtures from "../components/fixtures";
 import RelatedArticles from "../components/related-articles";
 import Header from "../components/header";
 import SafeArea from "../components/safe-area";
+import { URL, URLSearchParams } from "react-native-url-polyfill";
+import "url-search-params-polyfill";
+import { getSponsors } from "../config/sanity";
 
 const MainScreen = () => {
+  global.URL = URL;
+  const params = new URLSearchParams();
+  params.set("foo", "bar");
+  const [sponsors, setSponsors] = useState([]);
+
+ 
   return (
     <SafeArea>
       <View
@@ -29,7 +38,7 @@ const MainScreen = () => {
           <ScrollView style={{ width: "100%" }}>
             <CarouselCard />
             <HotTopics />
-            <Sponsors />
+            <Sponsors sponsors={sponsors} />
             <Fixtures />
             <RelatedArticles />
           </ScrollView>

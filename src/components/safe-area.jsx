@@ -5,8 +5,7 @@ const SafeArea = (props) => {
   return (
     <View
       style={{
-        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight  : 0,
-        // margin: 5,
+        paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
       }}
     >
       <SafeAreaView>{props.children}</SafeAreaView>

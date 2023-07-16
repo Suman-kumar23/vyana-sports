@@ -1,7 +1,6 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { Avatar } from "@rneui/themed";
-import { Link } from "@react-navigation/native";
 
 const sponsors = [
   { id: 1, source: "https://picsum.photos/800" },

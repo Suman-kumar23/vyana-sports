@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, Pressable } from "react-native";
 
 import React, { useState } from "react";
 import { Avatar } from "@rneui/themed";
@@ -11,19 +11,6 @@ const fixtures = [
 ];
 
 const Fixtures = () => {
-  // const [fixtures, setFixtures] = useState([]);
-
-  // const addFixture = () => {
-  //   const newFixture = {
-  //     team1: "Team A",
-  //     team2: "Team B",
-  //     date: "2023-07-15",
-  //     venue: "Stadium X",
-  //   };
-
-  //   setFixtures([...fixtures, newFixture]);
-  // };
-
   return (
     <View>
       <Text
@@ -37,10 +24,9 @@ const Fixtures = () => {
         Fixtures
       </Text>
       {fixtures.map((fixture, index) => (
-        <TouchableOpacity key={index}>
+        <Pressable key={index} onPress={() => console.log("Pressed")}>
           <View
             style={{
-              // backgroundColor: "blue",
               height: 80,
               width: "80%",
               marginBottom: 20,
@@ -53,20 +39,12 @@ const Fixtures = () => {
               borderWidth: 1.5,
             }}
           >
-            {/* <View>
-            <Text>
-              {fixture.team1} vs. {fixture.team2}
-            </Text>
-          </View>
-          <Text>Date: {fixture.date}</Text>
-          <Text>Venue: {fixture.venue}</Text> */}
             <View
               style={{
                 flexDirection: "row",
                 justifyContent: "space-between",
                 height: "100%",
                 margin: 0,
-                // backgroundColor: "red",
               }}
             >
               <View
@@ -79,7 +57,6 @@ const Fixtures = () => {
               >
                 <Avatar
                   size={50}
-                  // rounded
                   source={{ uri: "https://picsum.photos/300" }}
                 />
                 <Text style={{ fontSize: 12, fontWeight: "bold" }}>
@@ -104,7 +81,6 @@ const Fixtures = () => {
               >
                 <Avatar
                   size={50}
-                  // rounded
                   source={{ uri: "https://picsum.photos/300" }}
                 />
                 <Text style={{ fontSize: 12, fontWeight: "bold" }}>
@@ -113,7 +89,7 @@ const Fixtures = () => {
               </View>
             </View>
           </View>
-        </TouchableOpacity>
+        </Pressable>
       ))}
     </View>
   );

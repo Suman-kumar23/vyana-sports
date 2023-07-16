@@ -19,7 +19,6 @@ const HotTopics = () => {
         height: 160,
         width: "100%",
         marginBottom: 5,
-        
       }}
     >
       <Text
@@ -32,31 +31,29 @@ const HotTopics = () => {
       >
         Hot Topics
       </Text>
-      <View>
-        <FlatList
-          data={data}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              onPress={handlePress}
-              style={{
-                width: 200,
-                justifyContent: "space-between",
-                paddingLeft: 30,
 
-                // backgroundColor: "red",
-              }}
-            >
-              <Image
-                source={{ uri: item.source, height: "85%", width: "100%" }}
-                style={{ borderRadius: 10 }}
-              ></Image>
-              <Text style={{ bottom: 5, left: 60 }}>{item.title}</Text>
-            </TouchableOpacity>
-          )}
-          keyExtractor={(item) => item.id}
-          horizontal
-        />
-      </View>
+      <FlatList
+        data={data}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            onPress={handlePress}
+            style={{
+              width: 200,
+              paddingLeft: 30,
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Image
+              source={{ uri: item.source, height: "85%", width: "100%" }}
+              style={{ borderRadius: 10 }}
+            ></Image>
+            <Text>{item.title}</Text>
+          </TouchableOpacity>
+        )}
+        keyExtractor={(item) => item.id}
+        horizontal
+      />
     </View>
   );
 };
