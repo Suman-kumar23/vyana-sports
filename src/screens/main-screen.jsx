@@ -21,8 +21,8 @@ const MainScreen = () => {
   const [ArticleData, setArticleData] = useState([]);
 
   useEffect(() => {
-    setIsLoading(true);
-    fetchMainScreenData();
+    // setIsLoading(true);
+    // fetchMainScreenData();
   }, []);
 
   

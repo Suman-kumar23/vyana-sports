@@ -4,7 +4,8 @@ import { Avatar, Button, Input } from "@rneui/themed";
 import * as ImagePicker from "expo-image-picker";
 import { setError, signUp } from "../store/slices/authSlice";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
 
 const SignUpScreen = () => {
   const [loading, setLoading] = useState(false);
@@ -15,31 +16,34 @@ const SignUpScreen = () => {
   const [selectedImage, setSelectedImage] = useState(
     "https://as1.ftcdn.net/v2/jpg/03/53/11/00/1000_F_353110097_nbpmfn9iHlxef4EDIhXB1tdTD0lcWhG9.jpg"
   );
+  const [msg, setMsg] = useState("");
+  const [img, setImg] = useState("");
 
   const dispatch = useDispatch();
+  const navigation = useNavigation();
+  const errormsg = useSelector((state) => state.auth.errorsssss);
 
   const pickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
-      quality: 1,
+      base64: true,
     });
+    let base64img = `data:image/jpg;base64,${result.assets[0].base64}`;
     if (!result.canceled) {
       setSelectedImage(result.assets[0].uri);
+      setImg(base64img);
     }
   };
 
   const handleSignUp = () => {
-    try {
-      if (password !== confirmPassword) {
-      } else {
-        setLoading(true);
-        dispatch(signUp(email, password, name));
-      }
-    } catch (error) {
+    setLoading(true);
+    dispatch(signUp(email, password, name, img));
+    setTimeout(() => {
       setLoading(false);
-    }
+      navigation.navigate("Login");
+    }, 2000);
   };
 
   return (
@@ -78,6 +82,7 @@ const SignUpScreen = () => {
         placeholder="Confirm Password"
         value={confirmPassword}
         onChangeText={(text) => setConfirmPassword(text)}
+        errorMessage={msg}
       />
       <Button
         title="Sign Up"

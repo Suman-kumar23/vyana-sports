@@ -12,9 +12,8 @@ const LoginScreen = ({ navigation }) => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [errorMsg, setErrorMessage] = useState();
 
-
   const dispatch = useDispatch();
-  
+
   const error = useSelector((state) => state.auth.error);
 
   const handleLogin = () => {
