@@ -58,7 +58,7 @@ export const signIn = (email, password, name) => async (dispatch) => {
       pic: userData.pic,
       isSubscribed: userData.isSubscribed,
     };
-    console.log(user);
+    // console.log(user);
     dispatch(setUser(user));
   } catch (error) {
     console.log(error.message);
