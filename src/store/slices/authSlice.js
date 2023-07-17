@@ -6,7 +6,13 @@ import {
   getAuth,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { collection, doc, getFirestore, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getFirestore,
+  setDoc,
+} from "firebase/firestore";
 
 const authSlice = createSlice({
   name: "auth",
@@ -36,15 +42,26 @@ export const { setUser, setError, removeUser } = authSlice.actions;
 
 export const signIn = (email, password, name) => async (dispatch) => {
   const auth = getAuth();
+  const db = getFirestore();
+
   try {
     const response = await signInWithEmailAndPassword(auth, email, password);
+    const docRef = doc(db, "users", response.user.uid);
+    const docSnap = await getDoc(docRef);
+
+    const userData = docSnap.data();
+
     const user = {
-      name,
-      email: response.user.email,
-      pic: response.user.photoURL,
+      id: userData.id,
+      name: userData.name,
+      email: userData.email,
+      pic: userData.pic,
+      isSubscribed: userData.isSubscribed,
     };
+    console.log(user);
     dispatch(setUser(user));
   } catch (error) {
+    console.log(error.message);
     dispatch(setError(error.message));
   }
 };
@@ -77,7 +94,7 @@ export const signUp = (email, password, name, img) => async (dispatch) => {
     })
       .then(async (r) => {
         let data = await r.json();
-        console.log(data.secure_url);
+        // console.log(data.secure_url);
         photoURL = data.secure_url;
 
         return data.secure_url;
@@ -86,6 +103,7 @@ export const signUp = (email, password, name, img) => async (dispatch) => {
     // -----------------------------------------------------------
 
     const user = {
+      id: response.user.uid,
       name: name,
       email: email,
       pic: photoURL,
@@ -100,7 +118,7 @@ export const signUp = (email, password, name, img) => async (dispatch) => {
       .catch((err) => {
         console.log(err);
       });
-
+    auth.signOut();
     // -----------------------------------------------------------
   } catch (error) {
     dispatch(setError(error.message));

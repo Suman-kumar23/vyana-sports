@@ -1,5 +1,5 @@
 import { View, Text } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import SafeArea from "../components/safe-area";
 
@@ -12,10 +12,10 @@ import { logOut } from "../store/slices/authSlice";
 
 const AboutScreen = () => {
   const dispatch = useDispatch();
+
   const handlelogOut = () => {
     dispatch(logOut());
   };
-
   const user = useSelector((state) => state.auth.user);
 
   return (
