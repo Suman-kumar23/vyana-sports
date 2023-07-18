@@ -13,26 +13,10 @@ import { Constants } from "expo-constants";
 // ];
 
 const HotTopics = ({ hotTopics }) => {
-  // const [hotTopics, setHotTopics] = useState([]);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const response = await axios.get(
-  //       `https://okhfigjs.api.sanity.io/v2021-10-21/data/query/production?query=*%5B_type%3D%3D%27hotTopics%27%5D`
-  //     );
-
-  //     const data = response.data.result;
-
-  //     setHotTopics(data);
-  //   };
-  //   fetchData();
-  // });
-
   const handlePress = () => {};
   return (
     <View
       style={{
-        height: 160,
         width: "100%",
         marginBottom: 5,
       }}
@@ -55,6 +39,7 @@ const HotTopics = ({ hotTopics }) => {
             onPress={handlePress}
             style={{
               width: 200,
+              height: 180,
               paddingLeft: 30,
               justifyContent: "space-between",
               alignItems: "center",
@@ -62,9 +47,11 @@ const HotTopics = ({ hotTopics }) => {
           >
             <Image
               source={{ uri: item.source, height: "85%", width: "100%" }}
-              style={{ borderRadius: 10 }}
+              style={{ borderRadius: 10, marginBottom: 10 }}
             ></Image>
-            <Text>{item.title}</Text>
+            <Text style={{ fontSize: 16, fontWeight: "bold" }}>
+              {item.title}
+            </Text>
           </TouchableOpacity>
         )}
         keyExtractor={(item) => item.id}

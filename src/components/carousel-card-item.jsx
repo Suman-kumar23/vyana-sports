@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, Image, Pressable } from "react-native";
 import React from "react";
 
-const CarouselCardItem = ({ item, handleCardPress }) => {
+const CarouselCardItem = ({ item }) => {
   return (
     <Pressable
       style={{
@@ -13,11 +13,11 @@ const CarouselCardItem = ({ item, handleCardPress }) => {
       <Image
         source={{
           uri: item.picSource,
-          height: "90%",
-          width: "100%",
         }}
         style={{
           borderRadius: 10,
+          height: "90%",
+          width: "100%",
         }}
         resizeMode="cover"
       />

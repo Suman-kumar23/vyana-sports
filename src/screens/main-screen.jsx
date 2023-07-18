@@ -1,5 +1,5 @@
-import { ScrollView, Text, View } from "react-native";
-import React, { useEffect, useState } from "react";
+import { FlatList, ScrollView, Text, View } from "react-native";
+import React, { useCallback, useEffect, useState } from "react";
 
 import CarouselCard from "../components/corousal-card";
 import HotTopics from "../components/hot-topics";
@@ -12,7 +12,6 @@ import axios from "axios";
 import Loader from "../components/loader";
 
 const MainScreen = () => {
-
   const [isLoading, setIsLoading] = useState(false);
   const [CarouselData, setCarouselData] = useState([]);
   const [HotRespData, setHotRespData] = useState([]);
@@ -21,14 +20,14 @@ const MainScreen = () => {
   const [ArticleData, setArticleData] = useState([]);
 
   useEffect(() => {
-    // setIsLoading(true);
-    // fetchMainScreenData();
+    setIsLoading(true);
+    fetchMainScreenData();
   }, []);
 
-  
-  const fetchMainScreenData = async () => {
+  const fetchMainScreenData = useCallback(async () => {
     const baseUri =
       "https://okhfigjs.api.sanity.io/v2021-10-21/data/query/production?query=";
+
     const carouselResponse = await axios.get(
       `${baseUri}*%5B_type%3D%3D%27main_carousel%27%5D`
     );
@@ -57,8 +56,9 @@ const MainScreen = () => {
     setSponserData(sponserData);
     setFixtureData(fixtureData);
     setArticleData(articleData);
+
     setIsLoading(false);
-  };
+  }, []);
 
   return (
     <SafeArea>

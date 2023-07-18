@@ -1,5 +1,5 @@
 import { View, Text, FlatList, Pressable } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 
@@ -50,19 +50,54 @@ import axios from "axios";
 const RelatedArticles = ({ articles }) => {
   const navigation = useNavigation();
 
-  // const [articles, setArticles] = useState([]);
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-
-  // const fetchData = async () => {
-  //   const response = await axios.get(
-  //     `https://okhfigjs.api.sanity.io/v2021-10-21/data/query/production?query=*%5B_type%3D%3D%27articles%27%5D`
-  //   );
-  //   const data = response.data.result;
-  //   setArticles(data);
-  // };
+  const renderItem = useCallback(
+    ({ item }) => (
+      <Pressable onPress={() => navigation.navigate("Article", { item })}>
+        <View
+          key={item.articleId}
+          style={{
+            overflow: "hidden",
+            paddingHorizontal: 15,
+            paddingTop: 10,
+            backgroundColor: "#f5f5dc",
+            elevation: 8,
+            shadowColor: "gray",
+            shadowRadius: 8,
+            borderRadius: 8,
+            marginVertical: 10,
+          }}
+        >
+          <View
+            style={{
+              padding: 10,
+              height: 75,
+              overflow: "hidden",
+            }}
+          >
+            <Text
+              style={{
+                fontSize: 16,
+                fontWeight: "bold",
+                marginBottom: 10,
+                textTransform: "uppercase",
+              }}
+            >
+              {item.heading}
+            </Text>
+            <Text
+              style={{
+                fontSize: 16,
+                marginBottom: 10,
+              }}
+            >
+              {item.content}
+            </Text>
+          </View>
+        </View>
+      </Pressable>
+    ),
+    []
+  );
 
   return (
     <View
@@ -79,7 +114,6 @@ const RelatedArticles = ({ articles }) => {
           fontSize: 24,
           fontWeight: "bold",
           marginBottom: 20,
-          // backgroundColor: "red",
         }}
       >
         Related Articles
@@ -87,52 +121,7 @@ const RelatedArticles = ({ articles }) => {
       <View>
         <FlatList
           data={articles}
-          renderItem={({ item }) => (
-            <Pressable onPress={() => navigation.navigate("Article", { item })}>
-              <View
-                key={item.articleId}
-                style={{
-                  overflow: "hidden",
-                  padding: 10,
-                  backgroundColor: "#f5f5dc",
-                  elevation: 8,
-                  shadowColor: "gray",
-                  borderRadius: 8,
-                  marginVertical: 10,
-                  marginBottom: 8,
-                }}
-              >
-                <View
-                  style={{
-                    padding: 10,
-                    height: 75,
-                    overflow: "hidden",
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontWeight: "bold",
-                      marginBottom: 10,
-                      textTransform: "uppercase",
-
-                      // fontFamily: "Roboto",
-                    }}
-                  >
-                    {item.heading}
-                  </Text>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      marginBottom: 10,
-                    }}
-                  >
-                    {item.content}
-                  </Text>
-                </View>
-              </View>
-            </Pressable>
-          )}
+          renderItem={renderItem}
           keyExtractor={(item) => item.articleId}
         />
       </View>

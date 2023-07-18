@@ -12,20 +12,6 @@ import axios from "axios";
 // ];
 
 const Fixtures = ({ fixtures }) => {
-  // const [fixtures, setFixtures] = useState([]);
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-
-  // const fetchData = async () => {
-  //   const response = await axios.get(
-  //     `https://okhfigjs.api.sanity.io/v2021-10-21/data/query/production?query=*%5B_type%3D%3D%27fixtures%27%5D`
-  //   );
-  //   const data = response.data.result;
-  //   setFixtures(data);
-  // };
-
   return (
     <View>
       <Text
@@ -43,11 +29,11 @@ const Fixtures = ({ fixtures }) => {
           <View
             style={{
               height: 80,
-              width: "80%",
+              width: "88%",
               marginBottom: 20,
               alignItems: "center",
               justifyContent: "center",
-              left: "10%",
+              left: "6%",
               borderRadius: 10,
               overflow: "hidden",
               borderColor: "gray",
