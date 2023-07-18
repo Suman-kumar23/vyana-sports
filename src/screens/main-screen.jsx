@@ -59,6 +59,29 @@ const MainScreen = () => {
 
     setIsLoading(false);
   }, []);
+  
+  const data = [
+    { id: "1", type: "carousel", data: CarouselData },
+    { id: "2", type: "hotTopics", data: HotRespData },
+    { id: "3", type: "sponsors", data: SponserData },
+    { id: "4", type: "fixtures", data: FixtureData },
+    { id: "5", type: "relatedArticles", data: ArticleData },
+  ];
+
+  const renderComponent = useCallback(({ item }) => {
+    if (item.type === "carousel") {
+      return <CarouselCard mainCarouselData={item.data} />;
+    } else if (item.type === "hotTopics") {
+      return <HotTopics hotTopics={item.data} />;
+    } else if (item.type === "sponsors") {
+      return <Sponsors sponsors={item.data} />;
+    } else if (item.type === "fixtures") {
+      return <Fixtures fixtures={item.data} />;
+    } else if (item.type === "relatedArticles") {
+      return <RelatedArticles articles={item.data} />;
+    }
+    return null;
+  }, []);
 
   return (
     <SafeArea>
@@ -79,13 +102,12 @@ const MainScreen = () => {
             }}
           >
             <Header />
-            <ScrollView style={{ width: "100%" }}>
-              <CarouselCard mainCarouselData={CarouselData} />
-              <HotTopics hotTopics={HotRespData} />
-              <Sponsors sponsors={SponserData} />
-              <Fixtures fixtures={FixtureData} />
-              <RelatedArticles articles={ArticleData} />
-            </ScrollView>
+
+            <FlatList
+              data={data}
+              renderItem={renderComponent}
+              keyExtractor={(item) => item.id}
+            />
           </View>
         </View>
       )}

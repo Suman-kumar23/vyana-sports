@@ -46,8 +46,13 @@ const HotTopics = ({ hotTopics }) => {
             }}
           >
             <Image
-              source={{ uri: item.source, height: "85%", width: "100%" }}
-              style={{ borderRadius: 10, marginBottom: 10 }}
+              source={{ uri: item.source }}
+              style={{
+                borderRadius: 10,
+                marginBottom: 10,
+                height: "85%",
+                width: "100%",
+              }}
             ></Image>
             <Text style={{ fontSize: 16, fontWeight: "bold" }}>
               {item.title}
