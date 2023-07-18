@@ -5,6 +5,7 @@ import { Button, Input, Icon } from "@rneui/themed";
 import Lottie from "lottie-react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { signIn } from "../store/slices/authSlice";
+import HeaderComponent from "../components/header";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -24,8 +25,10 @@ const LoginScreen = ({ navigation }) => {
       <View
         style={{
           height: "100%",
+          marginTop: 10,
         }}
       >
+        <HeaderComponent />
         <View
           style={{
             padding: 30,
@@ -62,7 +65,14 @@ const LoginScreen = ({ navigation }) => {
               />
             }
           />
-          <Button title="forgot password" type="clear" onPress={() => {}} />
+          <Button
+            title="forgot password"
+            type="clear"
+            titleStyle={{ fontSize: 14, color: "gray", fontWeight: "500" }}
+            onPress={() => {
+              navigation.navigate("ForgotPassword");
+            }}
+          />
           <Button
             title="LOG IN"
             buttonStyle={{
@@ -76,12 +86,13 @@ const LoginScreen = ({ navigation }) => {
               marginHorizontal: 50,
               marginVertical: 10,
             }}
-            titleStyle={{ fontWeight: "bold" }}
+            titleStyle={{ fontWeight: "bold", fontSize: 18 }}
             onPress={handleLogin}
           />
           <Button
             title="Sign Up"
             type="clear"
+            titleStyle={{ fontWeight: "bold", fontSize: 18, color: "black" }}
             onPress={() => {
               navigation.navigate("SignUp");
             }}

@@ -1,15 +1,7 @@
 import { View, Text, Pressable } from "react-native";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Avatar } from "@rneui/themed";
-import axios from "axios";
-
-// const fixtures = [
-//   { team1: "Team A", team2: "Team B", date: "2023-07-15", venue: "Stadium X" },
-//   { team1: "Team A", team2: "Team B", date: "2023-07-15", venue: "Stadium X" },
-//   { team1: "Team A", team2: "Team B", date: "2023-07-15", venue: "Stadium X" },
-//   { team1: "Team A", team2: "Team B", date: "2023-07-15", venue: "Stadium X" },
-// ];
 
 const Fixtures = ({ fixtures }) => {
   return (

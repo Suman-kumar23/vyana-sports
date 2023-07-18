@@ -1,6 +1,8 @@
-import { FlatList, ScrollView, Text, View } from "react-native";
+import { FlatList, View } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
+import axios from "axios";
 
+// Component Imports
 import CarouselCard from "../components/corousal-card";
 import HotTopics from "../components/hot-topics";
 import Sponsors from "../components/sponsors";
@@ -8,10 +10,11 @@ import Fixtures from "../components/fixtures";
 import RelatedArticles from "../components/related-articles";
 import Header from "../components/header";
 import SafeArea from "../components/safe-area";
-import axios from "axios";
 import Loader from "../components/loader";
 
+// MainScreen
 const MainScreen = () => {
+  // States
   const [isLoading, setIsLoading] = useState(false);
   const [CarouselData, setCarouselData] = useState([]);
   const [HotRespData, setHotRespData] = useState([]);
@@ -19,6 +22,7 @@ const MainScreen = () => {
   const [FixtureData, setFixtureData] = useState([]);
   const [ArticleData, setArticleData] = useState([]);
 
+  // DataFetching while mounting
   useEffect(() => {
     setIsLoading(true);
     fetchMainScreenData();
@@ -59,7 +63,7 @@ const MainScreen = () => {
 
     setIsLoading(false);
   }, []);
-  
+
   const data = [
     { id: "1", type: "carousel", data: CarouselData },
     { id: "2", type: "hotTopics", data: HotRespData },
