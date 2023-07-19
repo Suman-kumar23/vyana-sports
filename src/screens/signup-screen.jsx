@@ -52,7 +52,7 @@ const SignUpScreen = () => {
       style={{
         flex: 1,
         alignItems: "center",
-        // justifyContent: "space-between",
+
         padding: 30,
         marginTop: 20,
       }}

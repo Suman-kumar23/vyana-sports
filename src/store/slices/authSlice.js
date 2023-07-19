@@ -6,15 +6,11 @@ import {
   getAuth,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import {
-  collection,
-  doc,
-  getDoc,
-  getFirestore,
-  setDoc,
-} from "firebase/firestore";
+import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
 
-import * as SecureStore from "expo-secure-store";
+// ('===================================================================');
+//                              AUTH SLICE
+// ('====================================================================');
 
 const authSlice = createSlice({
   name: "auth",
@@ -28,7 +24,7 @@ const authSlice = createSlice({
       state.user.name = action.payload.name;
       state.user.email = action.payload.email;
       state.user.pic = action.payload.pic;
-      // state.user = action.payload;
+
       state.isLoggedIn = true;
     },
     removeUser: (state, action) => {
@@ -41,6 +37,10 @@ const authSlice = createSlice({
 });
 
 export const { setUser, setError, removeUser } = authSlice.actions;
+
+// ('===================================================================');
+//                              LOG IN
+// ('====================================================================');
 
 export const signIn = (email, password, name) => async (dispatch) => {
   const auth = getAuth();
@@ -67,6 +67,10 @@ export const signIn = (email, password, name) => async (dispatch) => {
     dispatch(setError(error.message));
   }
 };
+
+// ('===================================================================');
+//                              SIGNUP
+// ('====================================================================');
 
 export const signUp = (email, password, name, img) => async (dispatch) => {
   const auth = getAuth();
@@ -124,6 +128,10 @@ export const signUp = (email, password, name, img) => async (dispatch) => {
     dispatch(setError(error.message));
   }
 };
+
+// ('===================================================================');
+//                              LOGOUT
+// ('====================================================================');
 
 export const logOut = () => (dispatch) => {
   try {
