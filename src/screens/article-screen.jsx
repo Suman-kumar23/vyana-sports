@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
 import React from "react";
 import { useRoute } from "@react-navigation/native";
 import { Image } from "@rneui/themed";
@@ -32,6 +32,18 @@ const ArticleScreen = () => {
             }}
           >
             {heading}
+          </Text>
+          <Text
+            style={{
+              position: "absolute",
+              right: 50,
+              bottom: 10,
+              fontSize: 16,
+              color: "white",
+              fontWeight: "400",
+            }}
+          >
+            {articleId}
           </Text>
         </View>
         <View style={{ marginHorizontal: 20, width: "90%" }}>

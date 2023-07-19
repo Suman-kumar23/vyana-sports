@@ -6,6 +6,7 @@ import { setError, signUp } from "../store/slices/authSlice";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import HeaderComponent from "../components/header";
 
 const SignUpScreen = () => {
   const [loading, setLoading] = useState(false);
@@ -51,59 +52,73 @@ const SignUpScreen = () => {
       style={{
         flex: 1,
         alignItems: "center",
-        justifyContent: "center",
+        // justifyContent: "space-between",
         padding: 30,
+        marginTop: 20,
       }}
     >
-      <TouchableOpacity onPress={pickImage}>
-        {/* {selectedImage && ( */}
-        <Avatar size={120} source={{ uri: selectedImage }} rounded />
-
-        {/* )} */}
-      </TouchableOpacity>
-      <Input
-        placeholder="Full Name"
-        style={{ marginTop: 30 }}
-        value={name}
-        onChangeText={(text) => setName(text)}
-      />
-      <Input
-        placeholder="Email"
-        value={email}
-        onChangeText={(text) => setEmail(text)}
-      />
-      <Input
-        placeholder="Password"
-        secureTextEntry
-        value={password}
-        onChangeText={(text) => setPassword(text)}
-      />
-      <Input
-        placeholder="Confirm Password"
-        value={confirmPassword}
-        onChangeText={(text) => setConfirmPassword(text)}
-        errorMessage={msg}
-      />
-      <Button
-        title="Sign Up"
-        disabled={loading}
-        buttonStyle={{
-          backgroundColor: "black",
-          borderRadius: 30,
-          borderColor: "white",
-          borderWidth: 2,
+      <HeaderComponent />
+      <View
+        style={{
+          marginTop: 20,
         }}
-        containerStyle={{
-          width: 200,
-          marginHorizontal: 50,
-          marginVertical: 10,
+      >
+        <TouchableOpacity onPress={pickImage}>
+          <Avatar size={120} source={{ uri: selectedImage }} rounded />
+        </TouchableOpacity>
+      </View>
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
         }}
-        titleStyle={{
-          fontWeight: "bold",
-        }}
-        style={{ marginTop: 30 }}
-        onPress={handleSignUp}
-      />
+      >
+        <Input
+          placeholder="Full Name"
+          style={{ marginTop: 30 }}
+          value={name}
+          onChangeText={(text) => setName(text)}
+        />
+        <Input
+          placeholder="Email"
+          value={email}
+          onChangeText={(text) => setEmail(text)}
+        />
+        <Input
+          placeholder="Password"
+          secureTextEntry
+          value={password}
+          onChangeText={(text) => setPassword(text)}
+        />
+        <Input
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChangeText={(text) => setConfirmPassword(text)}
+          errorMessage={msg}
+        />
+        <Button
+          title="Sign Up"
+          disabled={loading}
+          buttonStyle={{
+            backgroundColor: "black",
+            borderRadius: 30,
+            borderColor: "white",
+            borderWidth: 2,
+          }}
+          containerStyle={{
+            width: 200,
+            marginHorizontal: 50,
+            marginVertical: 10,
+          }}
+          titleStyle={{
+            fontWeight: "bold",
+          }}
+          style={{ marginTop: 30 }}
+          onPress={handleSignUp}
+        />
+      </View>
     </View>
   );
 };

@@ -1,5 +1,6 @@
-import { View, Text } from "react-native";
-import React, { useEffect, useState } from "react";
+import { View, Text, Linking } from "react-native";
+import React from "react";
+
 
 import SafeArea from "../components/safe-area";
 
@@ -12,6 +13,13 @@ import { logOut } from "../store/slices/authSlice";
 
 const AboutScreen = () => {
   const dispatch = useDispatch();
+
+  const url = {
+    whatsappURL: "",
+    facebookURL: "",
+    twitterURL: "",
+    instagramURL: "",
+  };
 
   const handlelogOut = () => {
     dispatch(logOut());
@@ -35,8 +43,12 @@ const AboutScreen = () => {
             size={100}
           />
           <View style={{ paddingLeft: 20, paddingBottom: 10 }}>
-            <Text>{user.name}</Text>
-            <Text>{user.email}</Text>
+            <Text style={{ fontSize: 18, fontWeight: "500", marginBottom: 4 }}>
+              {user.name}
+            </Text>
+            <Text style={{ marginBottom: 10, fontSize: 16, fontWeight: "400" }}>
+              {user.email}
+            </Text>
             <TouchableOpacity>
               <Text style={{ color: "purple" }}>Edit Profile</Text>
             </TouchableOpacity>
@@ -64,10 +76,38 @@ const AboutScreen = () => {
               justifyContent: "space-evenly",
             }}
           >
-            <Ionicons name="ios-logo-instagram" size={40} color="#FD1D1D" />
-            <Ionicons name="ios-logo-facebook" size={40} color="#4267B2" />
-            <Ionicons name="ios-logo-twitter" size={40} color="#1DA1F2" />
-            <Ionicons name="ios-logo-whatsapp" size={40} color="#25D366" />
+            <Ionicons
+              name="ios-logo-instagram"
+              size={40}
+              color="#FD1D1D"
+              onPress={() => {
+                Linking.openURL(url.instagramURL);
+              }}
+            />
+            <Ionicons
+              name="ios-logo-facebook"
+              size={40}
+              color="#4267B2"
+              onPress={() => {
+                Linking.openURL(url.facebookURL);
+              }}
+            />
+            <Ionicons
+              name="ios-logo-twitter"
+              size={40}
+              color="#1DA1F2"
+              onPress={() => {
+                Linking.openURL(url.twitterURL);
+              }}
+            />
+            <Ionicons
+              name="ios-logo-whatsapp"
+              size={40}
+              color="#25D366"
+              onPress={() => {
+                Linking.openURL(url.whatsappURL);
+              }}
+            />
           </View>
         </View>
         <View

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 const RootNavigation = () => {
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  return isLoggedIn ? <UserStack /> : <AuthStack />;
+  return !isLoggedIn ? <AuthStack /> : <UserStack />;
 };
 
 export default RootNavigation;

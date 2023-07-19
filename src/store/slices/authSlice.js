@@ -14,6 +14,8 @@ import {
   setDoc,
 } from "firebase/firestore";
 
+import * as SecureStore from "expo-secure-store";
+
 const authSlice = createSlice({
   name: "auth",
   initialState: {
@@ -58,7 +60,7 @@ export const signIn = (email, password, name) => async (dispatch) => {
       pic: userData.pic,
       isSubscribed: userData.isSubscribed,
     };
-    // console.log(user);
+
     dispatch(setUser(user));
   } catch (error) {
     console.log(error.message);
@@ -69,7 +71,6 @@ export const signIn = (email, password, name) => async (dispatch) => {
 export const signUp = (email, password, name, img) => async (dispatch) => {
   const auth = getAuth();
   const db = getFirestore();
-  const colRef = collection(db, "users");
 
   let apiUrl = "https://api.cloudinary.com/v1_1/dvvkzczgx/image/upload";
   let data = {
@@ -94,9 +95,7 @@ export const signUp = (email, password, name, img) => async (dispatch) => {
     })
       .then(async (r) => {
         let data = await r.json();
-        // console.log(data.secure_url);
         photoURL = data.secure_url;
-
         return data.secure_url;
       })
       .catch((err) => console.log(err));
@@ -108,6 +107,7 @@ export const signUp = (email, password, name, img) => async (dispatch) => {
       email: email,
       pic: photoURL,
       isSubscribed: false,
+      subscriptionType: 0,
     };
     // -----------------------------------------------------------
 
@@ -130,6 +130,7 @@ export const logOut = () => (dispatch) => {
     dispatch(removeUser());
   } catch (error) {
     dispatch(setError(error.message));
+    console.log(error);
   }
 };
 

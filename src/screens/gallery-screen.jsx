@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { View, StyleSheet, Image, FlatList } from "react-native";
 import SafeArea from "../components/safe-area";
-import { Ionicons } from "@expo/vector-icons";
 
 const GalleryScreen = () => {
   const images = [
@@ -16,8 +15,9 @@ const GalleryScreen = () => {
     // Add more images as needed
   ];
 
-  const renderItem = ({ item }) => (
-    <Image source={item.source} style={styles.image} />
+  const renderItem = useCallback(
+    ({ item }) => <Image source={item.source} style={styles.image} />,
+    []
   );
 
   return (
