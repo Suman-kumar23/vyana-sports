@@ -1,8 +1,10 @@
-import React, { useCallback } from "react";
-import { View, StyleSheet, Image, FlatList } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { useCallback, useEffect, useState } from "react";
+import { FlatList, Image, StyleSheet, View } from "react-native";
 import SafeArea from "../components/safe-area";
 
 const GalleryScreen = () => {
+  const [img, setImg] = useState([]);
   const images = [
     { id: "1", source: require("../../assets/photo.jpeg") },
     { id: "2", source: require("../../assets/photo.jpeg") },
@@ -14,6 +16,8 @@ const GalleryScreen = () => {
 
     // Add more images as needed
   ];
+
+
 
   const renderItem = useCallback(
     ({ item }) => <Image source={item.source} style={styles.image} />,

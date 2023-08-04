@@ -1,12 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import "../../config/firebase";
 
-import {
-  createUserWithEmailAndPassword,
-  getAuth,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
-import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { doc, getFirestore, setDoc } from "firebase/firestore";
 
 // ('===================================================================');
 //                              AUTH SLICE
@@ -37,36 +34,6 @@ const authSlice = createSlice({
 });
 
 export const { setUser, setError, removeUser } = authSlice.actions;
-
-// ('===================================================================');
-//                              LOG IN
-// ('====================================================================');
-
-export const signIn = (email, password, name) => async (dispatch) => {
-  const auth = getAuth();
-  const db = getFirestore();
-
-  try {
-    const response = await signInWithEmailAndPassword(auth, email, password);
-    const docRef = doc(db, "users", response.user.uid);
-    const docSnap = await getDoc(docRef);
-
-    const userData = docSnap.data();
-
-    const user = {
-      id: userData.id,
-      name: userData.name,
-      email: userData.email,
-      pic: userData.pic,
-      isSubscribed: userData.isSubscribed,
-    };
-
-    dispatch(setUser(user));
-  } catch (error) {
-    console.log(error.message);
-    dispatch(setError(error.message));
-  }
-};
 
 // ('===================================================================');
 //                              SIGNUP
@@ -122,7 +89,8 @@ export const signUp = (email, password, name, img) => async (dispatch) => {
       .catch((err) => {
         console.log(err);
       });
-    auth.signOut();
+
+    await auth.signOut();
     // -----------------------------------------------------------
   } catch (error) {
     dispatch(setError(error.message));
@@ -136,6 +104,7 @@ export const signUp = (email, password, name, img) => async (dispatch) => {
 export const logOut = () => (dispatch) => {
   try {
     dispatch(removeUser());
+    AsyncStorage.removeItem("user");
   } catch (error) {
     dispatch(setError(error.message));
     console.log(error);

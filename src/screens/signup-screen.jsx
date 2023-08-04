@@ -1,11 +1,11 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
 import { Avatar, Button, Input } from "@rneui/themed";
 import * as ImagePicker from "expo-image-picker";
-import { setError, signUp } from "../store/slices/authSlice";
+import React, { useState } from "react";
+import { TouchableOpacity, View } from "react-native";
+import { signUp } from "../store/slices/authSlice";
 
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigation } from "@react-navigation/native";
+import { getAuth } from "firebase/auth";
+import { useDispatch } from "react-redux";
 import HeaderComponent from "../components/header";
 
 const SignUpScreen = () => {
@@ -21,8 +21,6 @@ const SignUpScreen = () => {
   const [img, setImg] = useState("");
 
   const dispatch = useDispatch();
-  const navigation = useNavigation();
-  const errormsg = useSelector((state) => state.auth.errorsssss);
 
   const pickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -38,13 +36,12 @@ const SignUpScreen = () => {
     }
   };
 
+  const auth = getAuth();
+
   const handleSignUp = () => {
     setLoading(true);
     dispatch(signUp(email, password, name, img));
-    setTimeout(() => {
-      setLoading(false);
-      navigation.navigate("Login");
-    }, 2000);
+    setLoading(false);
   };
 
   return (

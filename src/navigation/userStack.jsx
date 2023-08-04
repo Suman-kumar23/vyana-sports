@@ -1,12 +1,12 @@
-import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import React from "react";
 
 // Screens
-import { AboutScreen, GalleryScreen, LiveScreen, MainScreen } from "../screens";
-import VideoScreen from "../screens/video-screen";
 import { createStackNavigator } from "@react-navigation/stack";
+import { AboutScreen, GalleryScreen, LiveScreen, MainScreen } from "../screens";
 import ArticleScreen from "../screens/article-screen";
+import VideoScreen from "../screens/video-screen";
 
 const Tab = createBottomTabNavigator();
 
@@ -37,8 +37,6 @@ const MainScreenStack = () => {
     </MainStack.Navigator>
   );
 };
-
-
 
 const App = () => {
   return (

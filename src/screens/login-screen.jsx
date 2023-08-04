@@ -1,11 +1,12 @@
-import { View } from "react-native";
-import React, { useState } from "react";
-import SafeArea from "../components/safe-area";
-import { Button, Input, Icon } from "@rneui/themed";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Button, Icon, Input } from "@rneui/themed";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 import Lottie from "lottie-react-native";
-import { useDispatch, useSelector } from "react-redux";
-import { signIn } from "../store/slices/authSlice";
+import React, { useState } from "react";
+import { View } from "react-native";
 import HeaderComponent from "../components/header";
+import SafeArea from "../components/safe-area";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -13,12 +14,28 @@ const LoginScreen = ({ navigation }) => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [errorMsg, setErrorMessage] = useState();
 
-  const dispatch = useDispatch();
+  const handleLogin = async () => {
+    const auth = getAuth();
+    const db = getFirestore();
+    try {
+      const response = await signInWithEmailAndPassword(auth, email, password);
+      const docRef = doc(db, "users", response.user.uid);
+      const docSnap = await getDoc(docRef);
 
-  const error = useSelector((state) => state.auth.error);
+      const userData = docSnap.data();
 
-  const handleLogin = () => {
-    dispatch(signIn(email, password));
+      const user = {
+        id: userData.id,
+        name: userData.name,
+        email: userData.email,
+        pic: userData.pic,
+        isSubscribed: userData.isSubscribed,
+      };
+
+      await AsyncStorage.setItem("user", JSON.stringify(user));
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
   };
   return (
     <SafeArea>
